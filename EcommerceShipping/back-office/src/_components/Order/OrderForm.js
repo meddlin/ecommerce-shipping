@@ -24,6 +24,30 @@ class OrderForm extends Component {
         return (
             <Form>
                 <TextField
+                    name="productId"
+                    label="Product Id"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.productId} />
+                {(touched.productId && errors.productId) ? <div>{errors.productId}</div> : ""}
+
+                <TextField
+                    name="productName"
+                    label="Product Name"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.productName} />
+                {(touched.productName && errors.productName) ? <div>{errors.productName}</div> : ""}
+
+                <TextField
+                    name="maxBusinessDaysToShip"
+                    label="Max Bus. Days To Ship"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.maxBusinessDaysToShip} />
+                {(touched.maxBusinessDaysToShip && errors.maxBusinessDaysToShip) ? <div>{errors.maxBusinessDaysToShip}</div> : ""}
+
+                <TextField
                     name="orderDate"
                     label="Order Date"
                     onChange={handleChange}
@@ -48,29 +72,35 @@ class OrderForm extends Component {
 };
 
 const formikEnhancer = withFormik({
-    mapPropsToValues({ orderDate, shipDate }) {
+    mapPropsToValues({ productId, productName, maxBusinessDaysToShip, orderDate, shipDate }) {
         return {
+            productId: productId || '',
+            productName: productName || '',
+            maxBusinessDaysToShip: maxBusinessDaysToShip || '',
             orderDate: orderDate || '',
             shipDate: shipDate || ''
         }
     },
     validationSchema: Yup.object().shape({
-        orderDate: Yup.string().required('Order Date is required'),
-        shipDate: Yup.string().required('Ship Date is required')
+        orderDate: Yup.string().required('Order Date is required')
+        
     }),
     handleSubmit: (values, { props, setSubmitting }) => {
-        const { orderDate, shipDate } = values;
-        if (orderDate && shipDate)
-            store.dispatch(orderActions.save(orderDate, shipDate));
+        let { productId, productName, maxBusinessDaysToShip, orderDate, shipDate } = values;
+
+        if (!shipDate) shipDate = new Date();
+        if (!maxBusinessDaysToShip) maxBusinessDaysToShip = 1;
+
+        store.dispatch(orderActions.checkShipDate({ productId, productName, maxBusinessDaysToShip, orderDate, shipDate }));
 
         setSubmitting(false);
     }
 })(OrderForm);
 
 function mapStateToProps(state) {
-    const { order } = state;
+    const { product } = state.order;
     return {
-        order: order
+        product: product
     };
 }
 

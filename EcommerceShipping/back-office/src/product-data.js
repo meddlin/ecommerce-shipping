@@ -1,4 +1,4 @@
-const orders = [
+const products = [
         {
             "productId": 1,
             "productName": "fugiat exercitation adipisicing",
@@ -57,4 +57,4 @@ const orders = [
         }
     ];
 
-export default orders;
+export default products;
