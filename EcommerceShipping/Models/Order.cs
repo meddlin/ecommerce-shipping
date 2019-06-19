@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EcommerceShipping.Models
+namespace EcommerceShipping3.Models
 {
     public class Order
     {
@@ -11,7 +11,7 @@ namespace EcommerceShipping.Models
         public List<Product> ItemsList { get; set; }
 
         public DateTime DateOrdered { get; set; }
-        public DateTime ShipDate { get; set; } 
+        public DateTime ShipDate { get; set; }
         public DateTime DateCreated { get; set; }
 
         /// <summary>

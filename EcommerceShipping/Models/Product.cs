@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EcommerceShipping.Models
+namespace EcommerceShipping3.Models
 {
     public class Product
     {
@@ -12,6 +12,7 @@ namespace EcommerceShipping.Models
         public int InventoryQuantity { get; set; }
         public bool ShipOnWeekends { get; set; }
         public int MaxBusinessDaysToShip { get; set; }
+        public DateTime OrderDate { get; set; }
         public DateTime ShipDate { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace EcommerceShipping3.Models
 {
-    public class Holiday
+    public class Manufacturer
     {
     }
 }
